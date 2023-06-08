@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="it-IT">
+<head>
+	<title>Aradia</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+	<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+</head>
+
+<body>
+	<div class="page-container">
+	<div class="manifesto-container">
+	  <img src="img/strumenti/chiodino.png" id="ball">
+	  <img src="img/strumenti/mezzaluna.png" id="second-ball">
+	  <img src="img/strumenti/trita-erbe.png" id="third-ball">
+
+	  <script>
+	    let ball = document.getElementById('ball');
+
+	    // Randomly position the first image
+	    ball.style.position = 'absolute';
+    	ball.style.left = getRandomPosition('.manifesto-container') + 'px';
+    	ball.style.top = getRandomPositionY('.manifesto-container') + 'px';
+
+	    ball.onmousedown = function(event) {
+
+	      let shiftX = event.clientX - ball.getBoundingClientRect().left;
+	      let shiftY = event.clientY - ball.getBoundingClientRect().top;
+
+	      ball.style.zIndex = 1000;
+	      document.body.append(ball);
+
+	      moveAt(event.pageX, event.pageY);
+
+	      function moveAt(pageX, pageY) {
+	        ball.style.left = pageX - shiftX + 'px';
+	        ball.style.top = pageY - shiftY + 'px';
+	      }
+
+	      function onMouseMove(event) {
+	        moveAt(event.pageX, event.pageY);
+
+	        ball.hidden = true;
+	        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+	        ball.hidden = false;
+
+	        if (!elemBelow) return;
+
+	      }
+
+	      document.addEventListener('mousemove', onMouseMove);
+
+	      ball.onmouseup = function() {
+	        document.removeEventListener('mousemove', onMouseMove);
+	        ball.onmouseup = null;
+	      };
+
+	    };
+
+	    ball.ondragstart = function() {
+	      return false;
+	    };
+
+	    let secondBall = document.getElementById('second-ball');
+
+	    // Randomly position the second image
+	    secondBall.style.position = 'absolute';
+    	secondBall.style.left = getRandomPosition('.manifesto-container') + 'px';
+    	secondBall.style.top = getRandomPositionY('.manifesto-container') + 'px';
+
+	    secondBall.onmousedown = function(event) {
+	      let shiftX = event.clientX - secondBall.getBoundingClientRect().left;
+	      let shiftY = event.clientY - secondBall.getBoundingClientRect().top;
+
+	      secondBall.style.position = 'absolute';
+	      secondBall.style.zIndex = 1000;
+	      document.body.append(secondBall);
+
+	      moveAt(event.pageX, event.pageY);
+
+	      function moveAt(pageX, pageY) {
+	        secondBall.style.left = pageX - shiftX + 'px';
+	        secondBall.style.top = pageY - shiftY + 'px';
+	      }
+
+	      function onMouseMove(event) {
+	        moveAt(event.pageX, event.pageY);
+
+	        secondBall.hidden = true;
+	        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+	        secondBall.hidden = false;
+
+	        if (!elemBelow) return;
+
+	        // ... additional logic for the second image if needed ...
+	      }
+
+	      document.addEventListener('mousemove', onMouseMove);
+
+	      secondBall.onmouseup = function() {
+	        document.removeEventListener('mousemove', onMouseMove);
+	        secondBall.onmouseup = null;
+	      };
+
+	    };
+
+	    secondBall.ondragstart = function() {
+	      return false;
+	    };
+
+	    let thirdBall = document.getElementById('third-ball');
+
+	    // Randomly position the second image
+	    thirdBall.style.position = 'absolute';
+    	thirdBall.style.left = getRandomPosition('.manifesto-container') + 'px';
+    	thirdBall.style.top = getRandomPositionY('.manifesto-container') + 'px';
+
+	    thirdBall.onmousedown = function(event) {
+	      let shiftX = event.clientX - thirdBall.getBoundingClientRect().left;
+	      let shiftY = event.clientY - thirdBall.getBoundingClientRect().top;
+
+	      thirdBall.style.position = 'absolute';
+	      thirdBall.style.zIndex = 1000;
+	      document.body.append(thirdBall);
+
+	      moveAt(event.pageX, event.pageY);
+
+	      function moveAt(pageX, pageY) {
+	        thirdBall.style.left = pageX - shiftX + 'px';
+	        thirdBall.style.top = pageY - shiftY + 'px';
+	      }
+
+	      function onMouseMove(event) {
+	        moveAt(event.pageX, event.pageY);
+
+	        thirdBall.hidden = true;
+	        let elemBelow = document.elementFromPoint(event.clientX, event.clientY);
+	        thirdBall.hidden = false;
+
+	        if (!elemBelow) return;
+
+	        // ... additional logic for the third image if needed ...
+	      }
+
+	      document.addEventListener('mousemove', onMouseMove);
+
+	      thirdBall.onmouseup = function() {
+	        document.removeEventListener('mousemove', onMouseMove);
+	        thirdBall.onmouseup = null;
+	      };
+
+	    };
+
+	    thirdBall.ondragstart = function() {
+	      return false;
+	    };
+
+	    function getRandomPosition(containerSelector) {
+      const container = document.querySelector(containerSelector);
+
+      // Set the maximum position within the container
+      const containerRect = container.getBoundingClientRect();
+      const containerWidth = containerRect.width;
+      const containerHeight = containerRect.height;
+
+      // Set the maximum offset for the image
+      const maxOffset = 0;
+
+      // Generate random positions within the limits
+      const randomX = Math.floor(Math.random() * (containerWidth - maxOffset));
+      const randomY = Math.floor(Math.random() * (containerHeight - maxOffset));
+
+      return randomX;
+    }
+
+      function getRandomPositionY(containerSelector) {
+      const container = document.querySelector(containerSelector);
+
+      // Set the maximum position within the container
+      const containerRect = container.getBoundingClientRect();
+      const containerWidth = containerRect.width;
+      const containerHeight = containerRect.height;
+
+      // Set the maximum offset for the image
+      const maxOffset = 0;
+
+      // Generate random positions within the limits
+      const randomX = Math.floor(Math.random() * (containerWidth - maxOffset));
+      const randomY = Math.floor(Math.random() * (containerHeight - maxOffset));
+
+      console.log(container);
+      console.log(containerHeight);
+      console.log(randomY);
+
+      return randomY;
+    }
+	  </script>
+	</div>
+		<div class="site-header">
+			<div class="menu">
+				<a href="main.html" rel="home">Programma</a>
+				<a href="https://google.com/" target="blank" rel="home">Edizioni</a>
+				<a href="main.html" rel="home">Chi Siamo</a>
+				<a href="manifesto.html" rel="home">Manifesto</a>
+			</div>
+
+			<div class="language-switcher">
+				<div class="menu-item not-current">
+					<a href="index.html">Italiano</a>
+				</div>
+				<div class="menu-item current">
+					<a href="en.html">English</a>
+				</div>	
+			</div>
+		</div>
+
+		<div id="section-1" class="container">
+				<div class="events">
+					<div class="single-event-manifesto">
+						<p class="custom-hover">
+						Manifesto
+						<br>
+						<br>
+						<br>
+						1.<br>
+						Aradia è la creazione di un’atmosfera incentrata sulla non-oppressione e sul rifiuto dell’antropocentrismo. Un folk festival di tre giorni per esplorare pratiche lontane dalle logiche di potere.
+						</p>
+						<br>
+						<p>
+						2.<br> 
+						Aradia è scoperta di sé, del luogo, e degli altri, inteso come gruppo all’interno del quale intraprendere un percorso e poter immaginare di costruire connessioni e rapporti di alleanza.
+						</p>
+						<br>
+						<p>
+						3.<br>
+						Aradia è anche sinonimo di grottesco, di gioco, di inusuale. A partire da elementi radicati nella tradizione paesana italiana, enfatizza ed invita ad un atteggiamento più diretto, sincero ed onesto con il contesto e con gli altri. 
+						</p>
+						<br>
+						<p>
+						4.<br>
+						Aradia è un evento ciclico e come ogni essere vivente, cambia forma nel tempo: ogni anno si svolge in piccoli luoghi caratterizzati da una matrice tradizionale e folcloristica, lontani ed incontaminati dal sistema-città. 
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<footer id="site-footer" class="site-footer" role="content-info">
+		<div class="site-mainfooter">
+			<div class="row">
+				<div class="footer-title">
+					<p>aradia folk festival</p>	
+				</div>
+				<div class="footer-info">
+					<p>La Scarzuola<br>Montegabbione (TR)</p>
+					<br>
+					<p>42.898577°N 12.152892°E</p>
+					<p>aradiafolkfestival@gmail.com</p>	
+				</div>
+				<div class="footer-social">
+					<a class="button" href="https://www.instagram.com">Instagram</a>
+					<a class="button" href="https://www.instagram.com">Facebook</a>
+					<a class="button" href="https://www.instagram.com">Youtube</a>
+					<a class="button" href="https://www.instagram.com">Twitter</a>
+					<a class="button" href="https://www.instagram.com">Telegram</a>
+				</div>
+				<div class="footer-lang">
+					<div class="menu-time not-current">
+						<a href="index.html">Italiano</a>
+					</div>
+					<div class="menu-time current">
+						<a href="en.html">English</a>
+					</div>
+				</div>
+			</div>
+			
+		
+	</footer>
+	<script language="javascript" type="text/javascript" src="script.js"></script>
+</body>
+</html>
